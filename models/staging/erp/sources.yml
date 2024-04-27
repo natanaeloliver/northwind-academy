@@ -2,11 +2,47 @@ version: 2
 
 sources:
   - name: erp
+    description: Modelo com as tabelas fonte - raw tables
     database: fea24_4 
     schema: raw_northwind
     tables:
-      - name: orders
-      - name: customers
+      - name: CUSTOMER
+        description: Tabela dos clientes
+        columns:
+          - name: ID
+            description: Identificador dos clientes
+            tests:
+              - unique
+              - not_null
+      - name: EMPLOYEE
+        description: Tabela dos funcionários
+        columns:
+          - name: ID
+            description: Identificador dos funcionários
+            tests:
+              - unique
+              - not_null              
+      - name: _ORDER_
+        description: Tabela dos cabeçalho das ordens de compra
+        columns:
+          - name: CUSTOMERID
+            description: Identificador dos clientes
+            tests:
+              - relationships:
+                  to: ref('ID')
+                  field: CUSTOMER
+          - name: EMPLOYEEID
+            description: Identificador dos funcionários
+            tests:
+              - relationships:
+                  field: ID
+                  to: ref('EMPLOYEE')
+          - name: ID
+            description: Identificador das ordens de compra
+            tests:
+              - unique
+              - not_null
+
       - name: product
       - name: category
       
