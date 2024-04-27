@@ -6,6 +6,9 @@ sources:
     database: fea24_4 
     schema: raw_northwind
     tables:
+      - name: product
+      - name: category
+      - name: supplier
       - name: CUSTOMER
         description: Tabela dos clientes
         columns:
@@ -43,7 +46,6 @@ sources:
               - unique
               - not_null
 
-      - name: product
-      - name: category
+
       
 
