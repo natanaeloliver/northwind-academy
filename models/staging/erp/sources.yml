@@ -7,9 +7,34 @@ sources:
     schema: raw_northwind
     tables:
       - name: product
+        description: Tabela de produtos
       - name: category
+        description: Tabela das categorias
       - name: supplier
-      - name: custumer
+        description: Tabela dos fornecedores
+      - name: region
+        description: Tabela das regiões
+      - name: territory
+        description: Tabela das cidades
+        columns:
+          - name: regionid
+            description: Identificador das regiões
+            tests:
+              - relationships:
+                  field: ID
+                  to: ref('region')
+      - name: employeeterritory
+        description: Tabela da releção entre os funcionários e as cidades
+        columns:
+          - name: territoryid
+            description: Identificador das cidades
+            tests:
+              - relationships:
+                  field: ID
+                  to: ref('territory')
+      - name: shipper
+        description: Tabela das transpotadores
+      - name: customer
         description: Tabela dos clientes
         columns:
           - name: ID
@@ -48,6 +73,7 @@ sources:
             tests:
               - unique
               - not_null
+      
 
       
 
