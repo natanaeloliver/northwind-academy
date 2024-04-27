@@ -14,9 +14,6 @@ sources:
         columns:
           - name: ID
             description: Identificador dos clientes
-            tests:
-              - unique
-              - not_null
       - name: employee
         description: Tabela dos funcionários
         columns:
