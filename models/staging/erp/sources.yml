@@ -34,7 +34,7 @@ sources:
                   to: ref('territory')
       - name: shipper
         description: Tabela das transpotadores
-      - name: custumer
+      - name: customer
         description: Tabela dos clientes
         columns:
           - name: ID
