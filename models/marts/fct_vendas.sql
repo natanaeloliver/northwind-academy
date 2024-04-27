@@ -11,6 +11,14 @@ with
         select *
         from {{ ref('dim_funcionarios') }}
     )
+    , dim_clientes as (
+        select *
+        from {{ ref('dim_clientes') }}
+    )
+    , dim_transportadoras as (
+        select *
+        from {{ ref('dim_transportadoras') }}
+    )
     , joined as (
         select
             fatos.sk_vendas
@@ -41,9 +49,16 @@ with
             , dim_funcionarios.CARGO_FUNCIONARIO
             , dim_funcionarios.DT_CONTRATACAO
             , dim_funcionarios.NM_GERENTE
+            , dim_clientes.NM_CLIENTE
+            , dim_clientes.CIDADE_CLIENTE
+            , dim_clientes.REGIAO_CLIENTE
+            , dim_clientes.PAIS_CLIENTE
+            , dim_transportadoras.NM_TRANSPORTADORA
         from pedido_por_itens as fatos
         left join dim_produtos on fatos.fk_produto = dim_produtos.pk_produto
         left join dim_funcionarios on fatos.fk_funcionario = dim_funcionarios.pk_funcionario
+        left join dim_clientes on fatos.fk_cliente = dim_clientes.pk_cliente
+        left join dim_transportadoras on fatos.fk_transportadora = dim_transportadoras.pk_transportadora
     )
     , metricas as (
         select
@@ -74,6 +89,11 @@ with
             , CARGO_FUNCIONARIO
             , DT_CONTRATACAO
             , NM_GERENTE
+            , NM_CLIENTE
+            , CIDADE_CLIENTE
+            , REGIAO_CLIENTE
+            , PAIS_CLIENTE
+            , NM_TRANSPORTADORA
             , quantidade * preco_da_unidade as valor_bruto
             , quantidade * (1 - desconto_perc) * preco_da_unidade as valor_liquido
             , cast(
