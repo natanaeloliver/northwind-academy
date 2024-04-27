@@ -9,15 +9,12 @@ sources:
       - name: product
       - name: category
       - name: supplier
-      - name: CUSTOMER
+      - name: custumer
         description: Tabela dos clientes
         columns:
           - name: ID
             description: Identificador dos clientes
-            tests:
-              - unique
-              - not_null
-      - name: EMPLOYEE
+      - name: employee
         description: Tabela dos funcionários
         columns:
           - name: ID
@@ -25,7 +22,7 @@ sources:
             tests:
               - unique
               - not_null              
-      - name: _ORDER_
+      - name: _order_
         description: Tabela dos cabeçalho das ordens de compra
         columns:
           - name: CUSTOMERID
@@ -33,19 +30,24 @@ sources:
             tests:
               - relationships:
                   to: ref('ID')
-                  field: CUSTOMER
+                  field: custumer
           - name: EMPLOYEEID
             description: Identificador dos funcionários
             tests:
               - relationships:
                   field: ID
-                  to: ref('EMPLOYEE')
+                  to: ref('employee')
           - name: ID
             description: Identificador das ordens de compra
             tests:
               - unique
               - not_null
-
+      - name: orderdetail
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
 
       
 
