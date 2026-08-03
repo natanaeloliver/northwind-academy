@@ -97,7 +97,7 @@ with
             , quantidade * preco_da_unidade as valor_bruto
             , quantidade * (1 - desconto_perc) * preco_da_unidade as valor_liquido
             , cast(
-                (dt_contratacao - data_do_pedido) / 365
+                (data_do_pedido - dt_contratacao) / 365
                 as numeric(18,2)
             )  as senioridade_em_anos
             , cast(

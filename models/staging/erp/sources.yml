@@ -22,18 +22,18 @@ sources:
             tests:
               - relationships:
                   field: ID
-                  to: ref('region')
+                  to: source('erp', 'region')
       - name: employeeterritory
-        description: Tabela da releção entre os funcionários e as cidades
+        description: Tabela da relação entre os funcionários e as cidades
         columns:
           - name: territoryid
             description: Identificador das cidades
             tests:
               - relationships:
                   field: ID
-                  to: ref('territory')
+                  to: source('erp', 'territory')
       - name: shipper
-        description: Tabela das transpotadores
+        description: Tabela das transportadoras
       - name: customer
         description: Tabela dos clientes
         columns:
@@ -48,20 +48,20 @@ sources:
               - unique
               - not_null              
       - name: _order_
-        description: Tabela dos cabeçalho das ordens de compra
+        description: Tabela dos cabeçalhos das ordens de compra
         columns:
           - name: CUSTOMERID
             description: Identificador dos clientes
             tests:
               - relationships:
-                  to: ref('ID')
-                  field: custumer
+                  field: ID
+                  to: source('erp', 'customer')
           - name: EMPLOYEEID
             description: Identificador dos funcionários
             tests:
               - relationships:
                   field: ID
-                  to: ref('employee')
+                  to: source('erp', 'employee')
           - name: ID
             description: Identificador das ordens de compra
             tests:
